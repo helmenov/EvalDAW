@@ -1,0 +1,27 @@
+# $Id: Makefile,v 1.1 2004/11/21 13:47:34 mikio Exp $
+#
+TARGET1 = picola
+TARGET2 = tdhs
+# CFLAGS = -g
+SUBS   = wavfile_simple.o pitch.o
+# CC     = gcc
+
+all   :  $(TARGET1) $(TARGET2)
+
+install : all
+	install $(TARGET1) /usr/local/bin
+	install $(TARGET2) /usr/local/bin
+
+$(TARGET1)  : $(TARGET1).o $(SUBS)
+	@$(CC) $(TARGET1).o $(SUBS) -o $@ -lm
+
+$(TARGET2) : $(TARGET2).o $(SUBS)
+	@$(CC) $(TARGET2).o $(SUBS) -o $@ -lm
+
+clean :
+	rm -f $(TARGET1) $(TARGET1).o  $(TARGET2) $(TARGET2).o $(SUBS)
+
+wavfile_simple.o : wavfile_simple.h
+pitch.o          : picola_tdhs.h
+picola.o         : wavfile_simple.o picola_tdhs.h
+tdhs.o           : picola_tdhs.h

@@ -1,0 +1,5 @@
+install:
+	install neroAacDec /usr/local/bin
+	install neroAacEnc /usr/local/bin
+	install neroAacTag /usr/local/bin
+
